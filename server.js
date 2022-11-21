@@ -12,6 +12,15 @@ const db = mysql.createConnection(
       database: process.env.DB_NAME,
     },
   );
+
+  
+    console.log("|---------------------------------|")
+    console.log("|                                 |")
+    console.log("|        EMPLOYEE MANAGER         |")
+    console.log("|                                 |")
+    console.log("|---------------------------------|")
+    
+  
   const promptUser = () => {
     inquirer.prompt ([
       {
@@ -70,6 +79,20 @@ const db = mysql.createConnection(
     }
     function addEmployee() {
         console.log('Add employee function')
+        db.promise().query("SELECT * ")
+    }
+
+    function viewallroles() {
+
+    }
+    function addrole () {
 
     }
 
+    function viewalldepartments(){
+
+    }
+    function adddepartment(){
+
+    }
+    
