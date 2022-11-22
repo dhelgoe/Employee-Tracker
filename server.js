@@ -76,23 +76,62 @@ const db = mysql.createConnection(
             let employee = data
             console.table(employee)
         })
+        promptUser()
     }
     function addEmployee() {
-        console.log('Add employee function')
-        db.promise().query("SELECT * ")
+      inquirer.prompt([
+        {
+          name: "firstname",
+          type: "input",
+          message: "Enter their first name "
+        },
+        {
+          name: "lastname",
+          type: "input",
+          message: "Enter their last name "
+        },
+        {
+          name: "role",
+          type: "list",
+          message: "What is their role? ",
+          choices: selectRole()
+        },
+      ]).then
     }
 
     function viewallroles() {
 
     }
     function addrole () {
-
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'rolename',
+          message: "What role would you like to add?",
+        },
+      ]).then(function(data){
+        db.query("INSERT INTO role(title) ")
+      })
     }
 
     function viewalldepartments(){
 
     }
     function adddepartment(){
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'departmentname',
+          message: "What's your department name",
+        },
 
+      ]).then(function(data){
+        db.query("INSERT INTO department(name) VALUES (?)", data.departmentname, function (err, result) {
+          console.log (result)
+        })
+      }) 
+     
+
+      
     }
     
