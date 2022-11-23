@@ -49,7 +49,7 @@ const db = mysql.createConnection(
             case 'Add Employee': 
                 addEmployee()
                 break;
-            case 'Update Employee Role':
+            case 'View All Roles':
                 viewallroles()
                 break;
             case 'Add Role':
@@ -62,7 +62,7 @@ const db = mysql.createConnection(
                 adddepartment()
                 break;
             default:
-                exit()
+               // exit()
                 break
         }
       })
@@ -96,12 +96,22 @@ const db = mysql.createConnection(
           message: "What is their role? ",
           choices: selectRole()
         },
-      ]).then
+      ]).then(function(data){
+        
+      })
     }
 
     function viewallroles() {
+      
+      db.promise().query("SELECT * FROM role LEFT JOIN department on role.department_id = department.id ").then(([data]) => {
+        console.log(data)
+        let roles = data
+        console.table(roles)
+    
+      })
+      promptUser()
+    };
 
-    }
     function addrole () {
       inquirer.prompt([
         {
@@ -110,13 +120,20 @@ const db = mysql.createConnection(
           message: "What role would you like to add?",
         },
       ]).then(function(data){
-        db.query("INSERT INTO role(title) ")
+        db.query("INSERT INTO role(title) VALUES (?)", data.rolename, function (err, result){
+          console.log (result)
+        })
       })
     }
 
     function viewalldepartments(){
+      db.promise().query("SELECT department.id AS id, department.name AS department FROM department").then(([data]) => {
+        let department = data
+        console.table(department)
+    })
+    promptUser()
+  };
 
-    }
     function adddepartment(){
       inquirer.prompt([
         {
@@ -130,8 +147,5 @@ const db = mysql.createConnection(
           console.log (result)
         })
       }) 
-     
-
-      
-    }
+     }
     
