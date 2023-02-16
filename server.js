@@ -36,6 +36,8 @@ const db = mysql.createConnection(
             'Add Role',
             'View All Departments',
             'Add Department',
+            'Delete an employee',
+            'Delete a role',
             'Quit',
         ]
       }
@@ -61,6 +63,12 @@ const db = mysql.createConnection(
             case 'Add Department':
                 adddepartment()
                 break;
+            case 'Delete an employee':
+                deleteemployee()
+                break;
+                case 'Delete a role':
+                  deleterole()
+                  break;
             default:
                // exit()
                 break
@@ -148,4 +156,38 @@ const db = mysql.createConnection(
         })
       }) 
      }
+
+     function deleteemployee() {
+      inquirer.prompt([
+        {
+          name: "id",
+          type: "input",
+          message: "Enter the ID of the employee you want to delete:"
+        }
+      ]).then(function(data){
+        db.query("DELETE FROM employee WHERE id=?", data.id, function (err, result){
+          console.log(result.affectedRows + " employee deleted.");
+          promptUser();
+        });
+      });
+    }
+
+    function deleterole() {
+      inquirer.prompt([
+        {
+          name: "id",
+          type: "input",
+          message: "Enter the ID of the role you want to delete:"
+        }
+      ]).then(function(data){
+        db.query("DELETE FROM role WHERE id=?", data.id, function (err, result){
+          console.log(result.affectedRows + " role deleted.");
+          promptUser();
+        });
+      });
+    }
+    
+
+
+    
     
