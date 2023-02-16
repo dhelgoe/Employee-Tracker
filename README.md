@@ -1,6 +1,7 @@
 # Employee-Tracker
 ## Installation
-Run the command npm start to run the appliction. To view the database from MySQL run mysql -u root -p.
+Run the command node server.js to run the application. To seed the database and run sql run sql -u root -p, then source schema.sql, then source seeds.sql to seed the database.
+
 
 ## Usage
 The application allows viewers to view, add and edit employees. Also allows you to edit the roles, departments, employees.
